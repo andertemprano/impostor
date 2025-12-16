@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>El Impostor</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Screen 1: Setup -->
+        <div id="setup-screen" class="screen active">
+            <h1>El Impostor</h1>
+            <p class="subtitle">¿Quién miente?</p>
+
+            <div class="input-group">
+                <input type="text" id="player-name" placeholder="Nombre del jugador" autocomplete="off">
+                <button id="add-player-btn" class="btn-icon">+</button>
+            </div>
+
+            <ul id="player-list" class="player-list">
+                <!-- Players will be added here -->
+            </ul>
+
+            <div class="settings-area">
+                <label for="impostor-count">Número de impostores:</label>
+                <select id="impostor-count">
+                    <option value="1" selected>1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+
+            <div class="action-area">
+                <button id="start-game-btn" class="btn-primary" disabled>Comenzar Partida</button>
+            </div>
+        </div>
+
+        <!-- Screen 2: Pass & Reveal (Consolidated) -->
+        <div id="game-turn-screen" class="screen">
+            <!-- Background Content (Visible initially) -->
+            <div class="turn-content">
+                <div class="glass-icon-container bounce">
+                    <span class="emoji-icon">📱</span>
+                </div>
+                <h3 class="overline-text">Pasa el móvil a</h3>
+                <h1 id="turn-player-name" class="hero-name-text">Nombre</h1>
+                <p class="instruction-text">Cuando lo tengas, desliza la tarjeta.</p>
+
+                <div class="turn-actions">
+                    <button id="prev-turn-btn" class="btn-ghost" style="display: none;">
+                        ← Volver
+                    </button>
+                    <!-- Hidden safe next button kept for logic compatibility if needed, though usually guided by swipe -->
+                    <button id="safe-next-btn" class="btn-primary">
+                        Siguiente Jugador
+                    </button>
+                </div>
+            </div>
+
+            <!-- Swipe Card Component -->
+            <div id="swipe-card" class="swipe-card">
+                <div class="swipe-handle-area">
+                    <div class="swipe-indicator">
+                        <span class="chevron">^</span>
+                        <span class="chevron">^</span>
+                    </div>
+                </div>
+
+                <div class="card-hidden-content">
+                    <div class="role-reveal-container">
+                        <h2 id="role-title">Tu Palabra</h2>
+                        <div class="secret-box">
+                            <span id="secret-value">?????</span>
+                        </div>
+                        <p id="role-instruction">Memorízala rapido.</p>
+
+                        <button id="card-next-btn" class="btn-primary">Siguiente Jugador</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen 4: Game Over / Debate -->
+        <div id="final-screen" class="screen">
+            <div class="card" style="background: none; box-shadow: none;"> <!-- Cleaner container -->
+                <div class="glass-icon-container bounce">
+                    <span class="emoji-icon">🕵️‍♂️</span>
+                </div>
+
+                <h2 id="final-title" class="highlight-text">¡QUE COMIENCE
+                    EL DEBATE!</h2>
+
+                <!-- Result Area (Always visible now) -->
+                <div id="result-area">
+                    <p class="subtitle" style="margin-bottom: 1rem; opacity: 0.8;">EMPIEZA:</p>
+                    <p id="starting-player" class="starting-player-text" style="font-size: 3.5rem;"></p>
+                </div>
+
+                <div class="action-area" style="margin-top: 4rem;">
+                    <!-- 'Comenzar Partida' button removed -->
+                    <button id="back-to-setup-btn" class="btn-secondary">Volver a Inicio</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="game_data.js"></script>
+    <script src="script.js?v=2.4"></script>
+</body>
+
+</html>
